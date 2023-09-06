@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="radio"
+            type="com.lokke.radio.endstation.data.network.responses.Radio" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/nav_header_height"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="bottom|center"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView3"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:cardBackgroundColor="@color/colorPrimaryLight"
+            android:paddingTop="@dimen/nav_header_vertical_spacing"
+            app:cardCornerRadius="150dp"
+            app:cardElevation="3dp">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimaryLight"
+                android:contentDescription="@string/nav_header_desc"
+                android:scaleType="centerCrop"
+                android:src="@{radio.image}" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <TextView
+            style="@style/TextAppearance.MdcTypographyStyles.Headline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@{radio.name}" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="15dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/textView3"
+                style="@style/TextAppearance.MdcTypographyStyles.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="2"
+                android:text="@string/yourcompany_gmail_com"
+                android:textColor="#BDBDBD"
+                app:layout_constraintEnd_toEndOf="@+id/radioNameTextView"
+                app:layout_constraintStart_toStartOf="@+id/radioNameTextView"
+                app:layout_constraintTop_toBottomOf="@+id/radioNameTextView" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

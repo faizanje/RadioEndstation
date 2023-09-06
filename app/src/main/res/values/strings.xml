@@ -1,0 +1,87 @@
+<resources>
+    <string name="app_name" translatable="false">Radio Endstation</string>
+    <string name="base_url" translatable="false">"https://lokke.de/radio/public/api/"</string>
+    <string name="discord_base_url" translatable="false">"https://discord.com/api/webhooks/"</string>
+    <!--App_ID generated from Admob-->
+    <string name="adMob_app_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
+    <!--interestial ads ID created from Admob-->
+    <string name="live_banner_ad_id" translatable="false"></string>
+    <string name="interestial_live_ad_id" translatable="false"></string>
+    <!--Admob test banner and interestial ads ID-->
+    <string name="test_banner_ad_id" translatable="false"></string>
+    <string name="interestial_test_ad_id" translatable="false"></string>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="play">PLAY</string>a
+    <string name="stop">STOP</string>
+    <string name="share">Teilen</string>
+    <string name="rate_us">bewerte uns</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="feedback">Feedback</string>
+    <string name="song_request">Wunschbox</string>
+    <string name="notification">Benachrichtigungen</string>
+    <string name="cancel">Abbrechen</string>
+
+
+    <!--    exit dialog text-->
+    <string name="exit_dialog_title">Sicher?</string>
+    <string name="exit_dialog_message">Das Beenden der App stoppt das Radio. Drücke MINIMIEREN um weiter Musik zu hören.</string>
+    <string name="exit_dialog_message2">Drücke BEENDEN um die App zu schließen, sonst ABBRECHEN.</string>
+    <string name="exit_positive_button">beenden</string>
+    <string name="exit_negative_button">minimieren</string>
+    <string name="exit_negative_button2">abbrechen</string>
+
+    <!--    report dialog text-->
+    <string name="report_title">Report Radio</string>
+    <string name="report_msg">Your report will be sent for review. Press CANCEL to abort.</string>
+    <string name="report">report</string>
+    <string name="oops">Oops!!</string>
+    <string name="no_results_found">No results found.</string>
+
+    <!--    no connectivity dialog-->
+    <string name="nc_dialog_title">Kein Netz!</string>
+    <string name="nc_dialog_message">"Schau nach deiner Internetverbindung und probier's nochmal."</string>
+    <string name="nc_dialog_button">"geht's jetzt?"</string>
+    <string name="submit">Senden</string>
+    <string name="email">Email</string>
+    <string name="subject">Betreff</string>
+    <string name="message">Nachricht</string>
+
+    <!-- About US Text-->
+    <string name="about">Über</string>
+    <string name="profile">Profil</string>
+    <string name="version">Version</string>
+    <string name="description">Beschreibung</string>
+    <string name="yourcompany_gmail_com"> </string>
+    <string name="about_description">Mit dieser kleinen und schlicht gehaltenen App ist es dir möglich Radio Endstation überall dort zu empfangen, wo dir eine Internetverbindung zur Verfügung steht. Die App bietet keinen Schnickschnack und ist absolut werbefrei. Lediglich ein Startknopf und ein paar Grafiken. Wenn du es zulässt, dass die App den Status deines Telefonanrufs abfragen darf, pausiert die Musik automatisch, sobald du einen Anruf tätigst. Oder Kurz: Hier bekommst du rund um die Uhr von deinen lieblings Skinheads mittels Oi! Punk Rock und Ska musikalisch auf die Fresse.</string>
+
+    <!--    response form-->
+    <string name="error_format_invalid">Format ist ungültig</string>
+    <string name="error_too_short">zu kurz</string>
+    <string name="error_field_empty">Feld ist leer</string>
+
+    <!--Social Media-->
+    <string name="fb_page_username">RadioEndstation</string>
+    <string name="fb_page_id">RadioEndstation</string>
+    <string name="instagram_username">radio_endstation</string>
+    <string name="twitter_username">RadioEndstation</string>
+    <string name="whatsApp_number">CnIlvVT3pxTDCThwUJpOMV</string>
+    <string name="facebook">Facebook</string>
+    <string name="instagram">Instagram</string>
+    <string name="twitter">Twitter</string>
+    <string name="whatsapp">WhatsApp</string>
+    <string name="about_us">über uns</string>
+    <string name="name">Dein Name</string>
+    <string name="request_1">Liedwunsch</string>
+    <string name="request_2">Alternativwunsch</string>
+
+
+</resources>

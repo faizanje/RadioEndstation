@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<layout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.lokke.radio.endstation.ui.songrequest.SongRequestViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        tools:context=".ui.songrequest.SongRequestActivity">
+
+
+        <include
+            android:id="@+id/toolbar_layout"
+            layout="@layout/layout_toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nameTextField"
+            style="@style/MyOutlineBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="@string/name"
+            android:textColorHint="@color/colorGrey"
+            app:error="@{viewModel.songRequest.nameError}"
+            app:errorEnabled="true"
+            app:errorTextColor="@color/errorText"
+            app:hintTextColor="@drawable/selector_input"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_layout">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/TextAppearance.MdcTypographyStyles.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:text="@={viewModel.songRequest.name}"
+                app:onFocus="@{viewModel.onFocusName}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/request1TextField"
+            style="@style/MyOutlineBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:hint="@string/request_1"
+            android:textColorHint="@color/colorGrey"
+            app:error="@{viewModel.songRequest.request1Error}"
+            app:errorEnabled="true"
+            app:errorTextColor="@color/errorText"
+            app:hintTextColor="@drawable/selector_input"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nameTextField">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/TextAppearance.MdcTypographyStyles.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={viewModel.songRequest.request1}"
+                app:onFocus="@{viewModel.onFocusRequest1}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/request2TextField"
+            style="@style/MyOutlineBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:hint="@string/request_2"
+            android:textColorHint="@color/colorGrey"
+            app:error="@{viewModel.songRequest.request2Error}"
+            app:errorEnabled="true"
+            app:errorTextColor="@color/errorText"
+            app:hintTextColor="@drawable/selector_input"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/request1TextField">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/TextAppearance.MdcTypographyStyles.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={viewModel.songRequest.request2}"
+                app:onFocus="@{viewModel.onFocusRequest2}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/messageTextField"
+            style="@style/MyOutlineBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:hint="@string/message"
+            android:textColorHint="@color/colorGrey"
+            app:errorEnabled="true"
+            app:errorTextColor="@color/errorText"
+            app:hintTextColor="@drawable/selector_input"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/request2TextField">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/TextAppearance.MdcTypographyStyles.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:gravity="top"
+                android:text="@={viewModel.songRequest.message}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_submit"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="24dp"
+            android:enabled="@{viewModel.songRequest.valid}"
+            android:onClick="@{viewModel::onSubmit}"
+            android:text="@string/submit"
+            app:backgroundTint="@color/colorAccent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

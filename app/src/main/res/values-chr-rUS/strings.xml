@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="rate_us">rate us</string>
+    <string name="share">share</string>
+    <string name="about_us">about us</string>
+    <string name="nc_dialog_message">Check your network connection and try again</string>
+    <string name="nc_dialog_button">try again</string>
+    <string name="submit">send</string>
+    <string name="email">Email</string>
+    <string name="subject">Subject</string>
+    <string name="message">Message</string>
+    <string name="about">about</string>
+    <string name="profile">profile</string>
+    <string name="version">Version</string>
+    <string name="description">description</string>
+    <string name="error_format_invalid">Format is invalid</string>
+    <string name="error_too_short">Too short</string>
+    <string name="error_field_empty">Field is empty</string>
+    <string name="name">your name</string>
+    <string name="request_1">song request</string>
+    <string name="request_2">2nd request</string>
+    <string name="oops">oops!!</string>
+    <string name="exit_negative_button">minimize</string>
+    <string name="exit_positive_button">exit</string>
+    <string name="exit_dialog_message">Exiting the app will stop the radio. Press MINIMIZE to continue listening to music.</string>
+    <string name="exit_dialog_message2">Press EXIT to close the app, otherwise CANCEL.</string>
+    <string name="exit_dialog_title">sure?</string>
+    <string name="cancel">cancel</string>
+    <string name="notification">Notifications</string>
+    <string name="song_request">song request</string>
+    <string name="feedback">feedback</string>
+</resources>

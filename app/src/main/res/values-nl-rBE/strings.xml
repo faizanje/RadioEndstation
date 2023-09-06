@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="about_us">over ons</string>
+    <string name="request_1">verzoek liedje</string>
+    <string name="request_2">Alternatief verzoek</string>
+    <string name="error_field_empty">Veld is leeg</string>
+    <string name="error_too_short">te kort</string>
+    <string name="error_format_invalid">Formaat is ongeldig</string>
+    <string name="about_description">Met deze kleine en eenvoudige app kunt u Radio Endstation overal ontvangen waar u een internetverbinding heeft. De app biedt geen franje en is absoluut vrij van reclame. Alleen een startknop en een paar plaatjes. Als u de app toestaat de status van uw telefoongesprek op te vragen, wordt de muziek automatisch gepauzeerd zodra u een telefoongesprek voert. Of in het kort: Hier krijg je de klok rond een muzikaal pak slaag van je favoriete skinheads door middel van Oi! punkrock en ska.</string>
+    <string name="notification">meldingen</string>
+    <string name="song_request">Muziek verzoek</string>
+</resources>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "534507164840",
+    "project_id": "radio-endstation",
+    "firebase_url": "https://radio-endstation.firebaseio.com",
+    "storage_bucket": "radio-endstation.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:534507164840:android:9ba686da89413687731e9d",
+        "android_client_info": {
+          "package_name": "com.lokke.radio.endstation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "534507164840-fd5kldlmefa0vdfhc9n3c9p6eve44f6d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAL2syWIYDQRIVa_Z7cY5RqcbAZGQYqe0U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "534507164840-fd5kldlmefa0vdfhc9n3c9p6eve44f6d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
