@@ -37,6 +37,7 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.lokke.radio.endstation.R;
 import com.lokke.radio.endstation.data.network.responses.Radio;
+import com.lokke.radio.endstation.util.Constants;
 
 
 import org.greenrobot.eventbus.EventBus;
@@ -74,7 +75,7 @@ public class RadioService extends Service implements Player.EventListener, Audio
     public String radioName;
 
 
-    private static final String TAG = "RadioService";
+    private static final String TAG = "asd";
 
 
     public class LocalBinder extends Binder {
@@ -146,6 +147,7 @@ public class RadioService extends Service implements Player.EventListener, Audio
         return iBinder;
     }
 
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -153,6 +155,10 @@ public class RadioService extends Service implements Player.EventListener, Audio
         Log.d(TAG, "onCreate: ");
 
 
+        init();
+    }
+
+    private void init() {
         onGoingCall = false;
 
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
@@ -237,6 +243,7 @@ public class RadioService extends Service implements Player.EventListener, Audio
 
         exoPlayer.release();
         exoPlayer.removeListener(this);
+        exoPlayer = null;
 
         if (telephonyManager != null)
             telephonyManager.listen(phoneStateListener, PhoneStateListener.LISTEN_NONE);
@@ -304,8 +311,10 @@ public class RadioService extends Service implements Player.EventListener, Audio
                 break;
         }
 
-        if (!status.equals(PlaybackStatus.IDLE))
+        Log.d(TAG, "onPlayerStateChanged: status" + status);
+        if (!status.equals(PlaybackStatus.IDLE)) {
             notificationManager.startNotify(status);
+        }
 
         EventBus.getDefault().post(status);
     }
@@ -358,13 +367,18 @@ public class RadioService extends Service implements Player.EventListener, Audio
 
     public void play(Radio radio) {
         this.radio = radio;
+        Log.d(Constants.TAG, "play: " + radio.toString());
         this.streamUrl = radio.getStreamingLink();
         Log.e(TAG, "play: url ----> " + streamUrl);
+        Log.e(TAG, "exoplayer:" + exoPlayer);
 
         if (wifiLock != null && !wifiLock.isHeld()) {
 
             wifiLock.acquire();
 
+        }
+        if (exoPlayer == null) {
+            init();
         }
         exoPlayer.addMetadataOutput(this);
         exoPlayer.prepare(buildMediaSource(streamUrl));
@@ -499,9 +513,12 @@ public class RadioService extends Service implements Player.EventListener, Audio
     }
 
     public void playOrPause(Radio radio) {
+        Log.d(Constants.TAG, "playOrPause: RadioService");
         if (!isPlaying()) {
+            Log.d(Constants.TAG, "playOrPause: RadioService !isPlaying true");
             play(radio);
         } else {
+            Log.d(Constants.TAG, "playOrPause: RadioService !isPlaying false");
             pause();
         }
     }
@@ -540,6 +557,5 @@ public class RadioService extends Service implements Player.EventListener, Audio
             exoPlayer.stop();
             notificationManager.cancelNotify();
         }
-
     }
 }

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 
 import androidx.lifecycle.LiveData;
@@ -19,6 +20,7 @@ import com.lokke.radio.endstation.data.repositories.MainActivityRepository;
 import com.lokke.radio.endstation.ui.player.TimerDialog;
 import com.lokke.radio.endstation.ui.radio.MetadataListener;
 import com.lokke.radio.endstation.ui.radio.RadioManager;
+import com.lokke.radio.endstation.util.Constants;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -199,6 +201,9 @@ public class MainActivityViewModel extends ViewModel {
 
     public void onPlayClicked(View view) {
 
+        Log.d(Constants.TAG, "radioManager != null: " + (radioManager != null));
+        Log.d(Constants.TAG, "radio != null: " + (radio != null));
+        Log.d(Constants.TAG, "radio != null && radioManager != null: " + (radio != null && radioManager != null));
         if (radio != null && radioManager != null) {
             radioManager.playOrPause(radio);
         }
@@ -224,10 +229,12 @@ public class MainActivityViewModel extends ViewModel {
 
 
     public void bind(MetadataListener callback) {
+        Log.d(Constants.TAG, getClass().getSimpleName() + " bind: called");
         radioManager.bind(callback);
     }
 
     public void unbind() {
+        Log.d(Constants.TAG, getClass().getSimpleName() + "unbind: called");
         radioManager.unbind();
     }
 

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +29,7 @@ import com.lokke.radio.endstation.ui.songrequest.SongRequestActivity;
 import com.lokke.radio.endstation.util.AdsUtil;
 import com.lokke.radio.endstation.util.AppUtil;
 import com.lokke.radio.endstation.ui.radio.MetadataListener;
+import com.lokke.radio.endstation.util.Constants;
 import com.onesignal.OneSignal;
 import com.lokke.radio.endstation.R;
 import com.lokke.radio.endstation.databinding.ActivityMainBinding;
@@ -124,12 +126,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         model.getRadioLiveData().observe(this, response -> {
             try {
+                Log.d(Constants.TAG, "observeValues: " + response);
                 privacyPolicyUrl = response.getPrivacyPolicy();
                 model.radio = response;
                 binding.appBarMainLayout.setRadio(response);
                 navHeaderMainBinding.setRadio(response);
 
-                Handler playHandler = new Handler();
+//                model.onPlayClicked(null);
+                Handler playHandler = new Handler(Looper.getMainLooper());
                 playHandler.postDelayed(() -> model.onPlayClicked(null), 1000);
             } catch (Exception ignored) {
 
@@ -242,6 +246,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Log.d(Constants.TAG, "onDestroy: ");
         model.unbind();
     }
 
