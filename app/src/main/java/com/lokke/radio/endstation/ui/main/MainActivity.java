@@ -28,6 +28,7 @@ import com.lokke.radio.endstation.ui.songrequest.SongRequestActivity;
 import com.lokke.radio.endstation.util.AdsUtil;
 import com.lokke.radio.endstation.util.AppUtil;
 import com.lokke.radio.endstation.ui.radio.MetadataListener;
+import com.lokke.radio.endstation.util.RadioApplication;
 import com.onesignal.OneSignal;
 import com.lokke.radio.endstation.R;
 import com.lokke.radio.endstation.databinding.ActivityMainBinding;
@@ -52,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
@@ -99,10 +99,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             if (isChecked) {
                 new PrefManager<Boolean>(this).set(SWITCH_KEY, true);
-                OneSignal.setSubscription(true);
+
+//                OneSignal.setSubscription(true);
             } else {
                 new PrefManager<Boolean>(this).set(SWITCH_KEY, false);
-                OneSignal.setSubscription(false);
+//                OneSignal.setSubscription(false);
             }
 
         });

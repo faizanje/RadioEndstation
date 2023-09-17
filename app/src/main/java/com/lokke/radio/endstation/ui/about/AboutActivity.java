@@ -7,7 +7,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
-
 import com.google.android.gms.ads.InterstitialAd;
 import com.lokke.radio.endstation.R;
 import com.lokke.radio.endstation.databinding.ActivityAboutBinding;

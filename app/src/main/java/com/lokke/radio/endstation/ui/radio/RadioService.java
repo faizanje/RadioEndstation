@@ -134,7 +134,6 @@ public class RadioService extends Service implements Player.EventListener, Audio
         @Override
         public void onPlay() {
             super.onPlay();
-
             resume();
         }
     };
@@ -233,7 +232,9 @@ public class RadioService extends Service implements Player.EventListener, Audio
     @Override
     public void onDestroy() {
         Log.d(TAG, "onDestroy: RadioService");
+
         pause();
+
 
         exoPlayer.release();
         exoPlayer.removeListener(this);

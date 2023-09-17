@@ -2,9 +2,13 @@ package com.lokke.radio.endstation.ui.songrequest;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewTreeObserver;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.lokke.radio.endstation.R;
@@ -27,12 +31,27 @@ public class SongRequestActivity extends AppCompatActivity {
         mBinding = ActivitySongRequestBinding.inflate(getLayoutInflater());
         setContentView(mBinding.getRoot());
 
+
+
         setUpToolbar();
 
         MainActivityRepository repository = new MainActivityRepository(getApplication());
         SongRequestFactory factory = new SongRequestFactory(repository);
         mViewModel = new ViewModelProvider(this, factory).get(SongRequestViewModel.class);
         mBinding.setViewModel(mViewModel);
+
+       /* mBinding.scrollView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                mBinding.scrollView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mBinding.scrollView.fullScroll(View.FOCUS_DOWN);
+                    }
+                });
+            }
+        });*/
+
 
         mViewModel.getButtonClick().observe(this, feedback -> {
             if (feedback != null) {
@@ -45,7 +64,10 @@ public class SongRequestActivity extends AppCompatActivity {
                     mBinding.request2TextField.getEditText().setText("");
                     mBinding.messageTextField.getEditText().setText("");
                     Log.d("faizan", "response: " + response);
-//                    Toast.makeText(this, response.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Your request has been successfully", Toast.LENGTH_SHORT).show();
+
+
+                    onBackPressed();
                 });
             }
         });
