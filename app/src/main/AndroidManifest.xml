@@ -53,7 +53,7 @@
             </intent-filter>
         </receiver>
 
-        <service android:name=".ui.radio.RadioService" />
+        <service android:name=".ui.radio.RadioService" android:exported="true" />
     </application>
 
 </manifest>

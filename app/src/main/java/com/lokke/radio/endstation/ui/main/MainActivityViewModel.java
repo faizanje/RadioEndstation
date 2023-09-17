@@ -46,6 +46,7 @@ public class MainActivityViewModel extends ViewModel {
 
     public MainActivityViewModel(Context context, MainActivityRepository repository) {
         radioManager = RadioManager.with(context);
+//        radioManager = new RadioManager(context);
         this.repository = repository;
         radioObjectLiveData = repository.getRadio();
     }

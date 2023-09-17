@@ -245,9 +245,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
-        Log.d(Constants.TAG, "onDestroy: ");
+        Log.d(Constants.TAG, getClass().getSimpleName() + " onDestroy: ");
         model.unbind();
+        super.onDestroy();
     }
 
     @Override

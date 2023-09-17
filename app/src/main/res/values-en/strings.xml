@@ -2,7 +2,7 @@
 <resources>
     <string name="share">share</string>
     <string name="request_2">2nd request</string>
-    <string name="request_1">song request</string>
+    <string name="request_1">Song request</string>
     <string name="name">your name</string>
     <string name="about_us">about us</string>
     <string name="error_field_empty">Field is empty</string>
@@ -25,7 +25,7 @@
     <string name="exit_dialog_title">sure?</string>
     <string name="cancel">cancel</string>
     <string name="notification">Notifications</string>
-    <string name="song_request">song request</string>
+    <string name="song_request">Song request</string>
     <string name="feedback">feedback</string>
     <string name="rate_us">rate us</string>
 </resources>

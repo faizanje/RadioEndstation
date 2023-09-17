@@ -50,15 +50,17 @@ public class MediaNotificationManager {
     }
 
 
-    public void startNotify(String playbackStatus) {
+    public void startNotify(String playbackStatus, String title, String albumUri) {
 
         final Bitmap[] largeIcon = new Bitmap[1];
 
         try {
 
+
             Glide.with(service.getApplicationContext())
                     .asBitmap()
-                    .load(service.getRadio().getImage())
+//                    .load(service.getRadio().getImage())
+                    .load(albumUri)
                     .into(new CustomTarget<Bitmap>(100,100) {
                         @Override
                         public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
@@ -111,7 +113,8 @@ public class MediaNotificationManager {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(service, PRIMARY_CHANNEL)
                 .setAutoCancel(false)
-                .setContentTitle(service.getRadio().getName())
+//                .setContentTitle(service.getRadio().getName())
+                .setContentTitle(title)
                 .setContentText("ON AIR")
                 .setLargeIcon(largeIcon[0])
                 .setContentIntent(pendingIntent)

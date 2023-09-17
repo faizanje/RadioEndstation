@@ -17,7 +17,7 @@
     <string name="error_too_short">Too short</string>
     <string name="error_field_empty">Field is empty</string>
     <string name="name">your name</string>
-    <string name="request_1">song request</string>
+    <string name="request_1">Song request</string>
     <string name="request_2">2nd request</string>
     <string name="oops">oops!!</string>
     <string name="exit_negative_button">minimize</string>
@@ -27,6 +27,6 @@
     <string name="exit_dialog_title">sure?</string>
     <string name="cancel">cancel</string>
     <string name="notification">Notifications</string>
-    <string name="song_request">song request</string>
+    <string name="song_request">Song request</string>
     <string name="feedback">feedback</string>
 </resources>

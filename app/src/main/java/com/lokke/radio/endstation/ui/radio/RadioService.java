@@ -35,13 +35,13 @@ import com.google.android.exoplayer2.source.hls.HlsMediaSource;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
-import com.lokke.radio.endstation.R;
 import com.lokke.radio.endstation.data.network.responses.Radio;
 import com.lokke.radio.endstation.util.Constants;
 
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -53,6 +53,7 @@ public class RadioService extends Service implements Player.EventListener, Audio
 
     private final IBinder iBinder = new LocalBinder();
     MetadataListener callbacks;
+    List<MetadataListener> callbacksList;
 
     private SimpleExoPlayer exoPlayer;
     private MediaSessionCompat mediaSession;
@@ -74,6 +75,8 @@ public class RadioService extends Service implements Player.EventListener, Audio
     private String streamUrl;
     public String radioName;
 
+
+    String currentTimeText, currentAlbumArtUrl;
 
     private static final String TAG = "asd";
 
@@ -143,7 +146,7 @@ public class RadioService extends Service implements Player.EventListener, Audio
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        Log.d(TAG, "onBind: Service ");
+        Log.d(TAG, getClass().getSimpleName() + " onBind");
         return iBinder;
     }
 
@@ -151,8 +154,7 @@ public class RadioService extends Service implements Player.EventListener, Audio
     @Override
     public void onCreate() {
         super.onCreate();
-
-        Log.d(TAG, "onCreate: ");
+        Log.d(TAG, getClass().getSimpleName() + " onCreate: ");
 
 
         init();
@@ -225,9 +227,11 @@ public class RadioService extends Service implements Player.EventListener, Audio
 
     @Override
     public boolean onUnbind(Intent intent) {
-
-        if (status.equals(PlaybackStatus.IDLE))
+        Log.d(TAG, getClass().getSimpleName() + " + onUnbind: called");
+        if (status.equals(PlaybackStatus.IDLE)) {
             stopSelf();
+        }
+
 
         return super.onUnbind(intent);
     }
@@ -313,7 +317,7 @@ public class RadioService extends Service implements Player.EventListener, Audio
 
         Log.d(TAG, "onPlayerStateChanged: status" + status);
         if (!status.equals(PlaybackStatus.IDLE)) {
-            notificationManager.startNotify(status);
+            notificationManager.startNotify(status, currentTimeText,currentAlbumArtUrl);
         }
 
         EventBus.getDefault().post(status);
@@ -377,9 +381,9 @@ public class RadioService extends Service implements Player.EventListener, Audio
             wifiLock.acquire();
 
         }
-        if (exoPlayer == null) {
-            init();
-        }
+//        if (exoPlayer == null) {
+//            init();
+//        }
         exoPlayer.addMetadataOutput(this);
         exoPlayer.prepare(buildMediaSource(streamUrl));
         exoPlayer.setPlayWhenReady(true);
@@ -406,21 +410,27 @@ public class RadioService extends Service implements Player.EventListener, Audio
     @Override
     public void onMetadata(Metadata metadata) {
         Log.e("Metadata is --->>>", metadata.toString());
-
         for (int i = 0; i < metadata.length(); i++) {
             Metadata.Entry entry = metadata.get(i);
             // Log.e("onMetadata: IcyInfo", entry.toString());
             if (entry instanceof IcyInfo) {
+                currentTimeText = ((IcyInfo) entry).title;
+                currentAlbumArtUrl = ((IcyInfo) entry).url;
+
                 callbacks.onMetadataUpdated(((IcyInfo) entry).title, ((IcyInfo) entry).url);
             } else {
                 try {
+                    currentTimeText = getArtistAndContent(metadata.toString());
+                    currentAlbumArtUrl = getAlbumArt(metadata.toString());
+
                     callbacks.onMetadataUpdated(getArtistAndContent(metadata.toString()), getAlbumArt(metadata.toString()));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-
         }
+
+        notificationManager.startNotify(status, currentTimeText,currentAlbumArtUrl);
     }
 
     private String getArtistAndContent(String metaString) throws Exception {
