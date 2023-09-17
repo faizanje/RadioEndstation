@@ -34,11 +34,11 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 
-        manifestPlaceholders = [
-                onesignal_app_id: 'd4f84244-5eca-45e4-92fb-e52e40b41c55',
-                // Project number pulled from dashboard, local value is ignored.
-                onesignal_google_project_number: 'REMOTE'
-        ]
+//        manifestPlaceholders = [
+//                onesignal_app_id: 'd4f84244-5eca-45e4-92fb-e52e40b41c55',
+//                // Project number pulled from dashboard, local value is ignored.
+//                onesignal_google_project_number: 'REMOTE'
+//        ]
     }
 
     buildTypes {
@@ -95,6 +95,7 @@ dependencies {
 
     //google ads SDK
     implementation 'com.google.android.gms:play-services-ads:19.4.0'
+//    implementation 'com.google.android.gms:play-services-ads:22.4.0'
 
     //Firebase SDK for Google Analytics
     implementation 'com.google.firebase:firebase-analytics:17.5.0'

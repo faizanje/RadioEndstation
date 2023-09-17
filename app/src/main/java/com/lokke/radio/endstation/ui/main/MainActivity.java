@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         MainActivityRepository repository = new MainActivityRepository(this);
         MainFactory factory = new MainFactory(this, repository);
-        model = new ViewModelProvider(this, factory).get(MainActivityViewModel.class);
+        model = new ViewModelProvider(MainActivity.this, factory).get(MainActivityViewModel.class);
         binding.setViewmodel(model);
 
         MobileAds.initialize(this, initializationStatus -> {
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             if (isChecked) {
                 new PrefManager<Boolean>(this).set(SWITCH_KEY, true);
-
+//                OneSignal.getNotifications().;
 //                OneSignal.setSubscription(true);
             } else {
                 new PrefManager<Boolean>(this).set(SWITCH_KEY, false);
