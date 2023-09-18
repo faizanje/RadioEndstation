@@ -11,10 +11,8 @@ public class RadioApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
         // Verbose Logging set to help debug issues, remove before releasing your app.
         OneSignal.getDebug().setLogLevel(LogLevel.VERBOSE);
-
         // OneSignal Initialization
         OneSignal.initWithContext(this, ONESIGNAL_APP_ID);
         OneSignal.getNotifications().requestPermission(true, Continue.with((result) -> {
