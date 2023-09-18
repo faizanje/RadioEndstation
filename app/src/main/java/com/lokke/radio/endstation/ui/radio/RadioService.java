@@ -1,24 +1,30 @@
 package com.lokke.radio.endstation.ui.radio;
 
+import android.Manifest;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Binder;
+import android.os.Build;
 import android.os.IBinder;
 import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaControllerCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.telephony.PhoneStateListener;
+import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.PlaybackParameters;
@@ -42,6 +48,7 @@ import com.lokke.radio.endstation.util.Constants;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
+import java.util.concurrent.Executor;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -100,23 +107,36 @@ public class RadioService extends Service implements Player.EventListener, Audio
         @Override
         public void onCallStateChanged(int state, String incomingNumber) {
 
-            if (state == TelephonyManager.CALL_STATE_OFFHOOK
-                    || state == TelephonyManager.CALL_STATE_RINGING) {
-
-                if (!isPlaying()) return;
-
-                onGoingCall = true;
-                stop();
-
-            } else if (state == TelephonyManager.CALL_STATE_IDLE) {
-
-                if (!onGoingCall) return;
-
-                onGoingCall = false;
-                resume();
-            }
+            callStackChanged(state);
         }
     };
+
+    private void callStackChanged(int state) {
+        if (state == TelephonyManager.CALL_STATE_OFFHOOK
+                || state == TelephonyManager.CALL_STATE_RINGING) {
+
+            if (!isPlaying()) return;
+
+            onGoingCall = true;
+            stop();
+
+        } else if (state == TelephonyManager.CALL_STATE_IDLE) {
+
+            if (!onGoingCall) return;
+
+            onGoingCall = false;
+            resume();
+        }
+    }
+
+    private CallStateListener callStateListener = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) ?
+            new CallStateListener() {
+                @Override
+                public void onCallStateChanged(int state) {
+                    callStackChanged(state);
+                }
+            }
+            : null;
 
     private MediaSessionCompat.Callback mediasSessionCallback = new MediaSessionCompat.Callback() {
         @Override
@@ -169,7 +189,19 @@ public class RadioService extends Service implements Player.EventListener, Audio
         wifiLock = ((WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE))
                 .createWifiLock(WifiManager.WIFI_MODE_FULL, "mcScPAmpLock");
 
-        mediaSession = new MediaSessionCompat(this, getClass().getSimpleName());
+        Intent mediaButtonIntent = new Intent(Intent.ACTION_MEDIA_BUTTON);
+        PendingIntent pendingIntent;
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+            pendingIntent = PendingIntent.getBroadcast
+                    (this, 0, mediaButtonIntent, PendingIntent.FLAG_IMMUTABLE);
+        } else {
+            pendingIntent = PendingIntent.getBroadcast
+                    (this, 0, mediaButtonIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
+
+
+        mediaSession = new MediaSessionCompat(this, getClass().getSimpleName(), null, pendingIntent);
         transportControls = mediaSession.getController().getTransportControls();
         mediaSession.setActive(true);
         mediaSession.setFlags(MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS | MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS);
@@ -181,7 +213,18 @@ public class RadioService extends Service implements Player.EventListener, Audio
 
 
         telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        telephonyManager.listen(phoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+                telephonyManager.registerTelephonyCallback(
+                        getApplicationContext().getMainExecutor(),
+                        callStateListener);
+            }
+
+        } else {
+            telephonyManager.listen(phoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
+        }
 
 
         exoPlayer = new SimpleExoPlayer.Builder(getApplicationContext()).build();
@@ -318,7 +361,7 @@ public class RadioService extends Service implements Player.EventListener, Audio
 
         Log.d(TAG, "onPlayerStateChanged: status" + status);
         if (!status.equals(PlaybackStatus.IDLE)) {
-            notificationManager.startNotify(status, currentTimeText,currentAlbumArtUrl);
+            notificationManager.startNotify(status, currentTimeText, currentAlbumArtUrl);
         }
 
         EventBus.getDefault().post(status);
@@ -410,7 +453,7 @@ public class RadioService extends Service implements Player.EventListener, Audio
 
     @Override
     public void onMetadata(Metadata metadata) {
-        Log.e("Metadata is --->>>", metadata.toString());
+        Log.e(Constants.TAG, "Metadata is --->>>" + metadata.toString());
         for (int i = 0; i < metadata.length(); i++) {
             Metadata.Entry entry = metadata.get(i);
             // Log.e("onMetadata: IcyInfo", entry.toString());
@@ -431,7 +474,7 @@ public class RadioService extends Service implements Player.EventListener, Audio
             }
         }
 
-        notificationManager.startNotify(status, currentTimeText,currentAlbumArtUrl);
+        notificationManager.startNotify(status, currentTimeText, currentAlbumArtUrl);
     }
 
     private String getArtistAndContent(String metaString) throws Exception {
