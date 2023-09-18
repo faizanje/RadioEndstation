@@ -1,4 +1,5 @@
 package com.lokke.radio.endstation.util;
+import com.onesignal.Continue;
 import com.onesignal.OneSignal;
 import com.onesignal.debug.LogLevel;
 import android.app.Application;
@@ -16,6 +17,9 @@ public class RadioApplication extends Application {
 
         // OneSignal Initialization
         OneSignal.initWithContext(this, ONESIGNAL_APP_ID);
+        OneSignal.getNotifications().requestPermission(true, Continue.with((result) -> {
+
+        }));
 
 
 

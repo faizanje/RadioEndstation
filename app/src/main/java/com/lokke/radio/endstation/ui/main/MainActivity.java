@@ -36,6 +36,7 @@ import com.lokke.radio.endstation.R;
 import com.lokke.radio.endstation.databinding.ActivityMainBinding;
 import com.lokke.radio.endstation.databinding.NavHeaderMainBinding;
 import com.lokke.radio.endstation.ui.radio.PlaybackStatus;
+import com.onesignal.OneSignal;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -103,11 +104,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             if (isChecked) {
                 new PrefManager<Boolean>(this).set(SWITCH_KEY, true);
-//                OneSignal.getUser().getPushSubscription().optOut();
+                OneSignal.getUser().getPushSubscription().optOut();
 //                OneSignal.setSubscription(true);
             } else {
                 new PrefManager<Boolean>(this).set(SWITCH_KEY, false);
-//                OneSignal.getUser().getPushSubscription().optIn();
+                OneSignal.getUser().getPushSubscription().optIn();
 //                OneSignal.setSubscription(false);
             }
 
