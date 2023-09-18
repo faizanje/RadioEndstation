@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.lokke.radio.endstation.data.repositories.MainActivityRepository;
 
-public class SongRequestFactory extends ViewModelProvider.NewInstanceFactory {
+public class SongRequestFactory implements ViewModelProvider.Factory {
     MainActivityRepository mRepository;
 
     public SongRequestFactory(MainActivityRepository repository) {

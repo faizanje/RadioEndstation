@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.lokke.radio.endstation.data.repositories.MainActivityRepository;
 
-public class MainFactory extends ViewModelProvider.NewInstanceFactory {
+public class MainFactory implements ViewModelProvider.Factory {
     Context mContext;
     MainActivityRepository mRepository;
 

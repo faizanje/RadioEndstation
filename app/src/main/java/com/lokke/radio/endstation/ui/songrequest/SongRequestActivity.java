@@ -1,23 +1,12 @@
 package com.lokke.radio.endstation.ui.songrequest;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
-
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.view.ViewTreeObserver;
-import android.widget.ScrollView;
 import android.widget.Toast;
-
 import com.lokke.radio.endstation.R;
 import com.lokke.radio.endstation.data.repositories.MainActivityRepository;
-
 import com.lokke.radio.endstation.databinding.ActivitySongRequestBinding;
-import com.lokke.radio.endstation.ui.feedback.FeedbackFactory;
-import com.lokke.radio.endstation.ui.feedback.FeedbackViewModel;
-import com.lokke.radio.endstation.util.AdsUtil;
 import com.lokke.radio.endstation.util.AppUtil;
 
 public class SongRequestActivity extends AppCompatActivity {
@@ -37,7 +26,7 @@ public class SongRequestActivity extends AppCompatActivity {
 
         MainActivityRepository repository = new MainActivityRepository(getApplication());
         SongRequestFactory factory = new SongRequestFactory(repository);
-        mViewModel = new ViewModelProvider(this, factory).get(SongRequestViewModel.class);
+        mViewModel = new ViewModelProvider(this,factory).get(SongRequestViewModel.class);
         mBinding.setViewModel(mViewModel);
 
        /* mBinding.scrollView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
