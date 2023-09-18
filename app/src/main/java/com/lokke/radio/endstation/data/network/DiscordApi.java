@@ -2,9 +2,6 @@ package com.lokke.radio.endstation.data.network;
 
 
 import com.lokke.radio.endstation.data.network.responses.Response;
-
-import org.json.JSONObject;
-
 import java.util.HashMap;
 
 import retrofit2.Call;

@@ -3,11 +3,9 @@ package com.lokke.radio.endstation.data.network;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.MutableLiveData;
-
-
-import com.lokke.radio.endstation.ui.songrequest.SongRequest;
 import com.lokke.radio.endstation.util.NoConnectivityDialog;
 
 import java.io.IOException;
@@ -28,7 +26,7 @@ public class SafeApiRequest {
 
         call.enqueue(new Callback<T>() {
             @Override
-            public void onResponse(Call<T> call, Response<T> response) {
+            public void onResponse(@NonNull Call<T> call, @NonNull Response<T> response) {
                 if(response.isSuccessful()){
                     Log.d("faizan", "onResponse: is success" + response.raw().toString());
                 }else{
@@ -43,7 +41,7 @@ public class SafeApiRequest {
             }
 
             @Override
-            public void onFailure(Call<T> call, Throwable t) {
+            public void onFailure(@NonNull Call<T> call, @NonNull Throwable t) {
                 responseObject.setValue(null);
                 showDialog(context, t);
             }

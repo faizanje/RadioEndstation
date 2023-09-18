@@ -68,9 +68,7 @@ public class AppUtil {
             dialogListener.onPositive();
         });
 
-        binding.btnCancel.setOnClickListener(view -> {
-            alertDialog.dismiss();
-        });
+        binding.btnCancel.setOnClickListener(view -> alertDialog.dismiss());
 
         alertDialog.show();
     }

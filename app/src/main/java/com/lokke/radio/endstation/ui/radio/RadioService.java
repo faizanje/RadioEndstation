@@ -18,6 +18,7 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.exoplayer2.ExoPlaybackException;
@@ -42,6 +43,7 @@ import com.lokke.radio.endstation.util.Constants;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -87,7 +89,7 @@ public class RadioService extends Service implements Player.EventListener, Audio
         }
     }
 
-    private BroadcastReceiver becomingNoisyReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver becomingNoisyReceiver = new BroadcastReceiver() {
 
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -95,7 +97,7 @@ public class RadioService extends Service implements Player.EventListener, Audio
         }
     };
 
-    private PhoneStateListener phoneStateListener = new PhoneStateListener() {
+    private final PhoneStateListener phoneStateListener = new PhoneStateListener() {
 
         @Override
         public void onCallStateChanged(int state, String incomingNumber) {
@@ -118,7 +120,7 @@ public class RadioService extends Service implements Player.EventListener, Audio
         }
     };
 
-    private MediaSessionCompat.Callback mediasSessionCallback = new MediaSessionCompat.Callback() {
+    private final MediaSessionCompat.Callback mediasSessionCallback = new MediaSessionCompat.Callback() {
         @Override
         public void onPause() {
             super.onPause();
@@ -325,12 +327,12 @@ public class RadioService extends Service implements Player.EventListener, Audio
     }
 
     @Override
-    public void onTimelineChanged(Timeline timeline, int reason) {
+    public void onTimelineChanged(@NonNull  Timeline timeline, int reason) {
 
     }
 
     @Override
-    public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {
+    public void onTracksChanged(@NonNull TrackGroupArray trackGroups, @NonNull TrackSelectionArray trackSelections) {
 
     }
 
@@ -340,7 +342,7 @@ public class RadioService extends Service implements Player.EventListener, Audio
     }
 
     @Override
-    public void onPlayerError(ExoPlaybackException error) {
+    public void onPlayerError(@NonNull ExoPlaybackException error) {
 
         EventBus.getDefault().post(PlaybackStatus.ERROR);
     }
@@ -361,7 +363,7 @@ public class RadioService extends Service implements Player.EventListener, Audio
     }
 
     @Override
-    public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
+    public void onPlaybackParametersChanged(@NonNull PlaybackParameters playbackParameters) {
 
     }
 
@@ -455,7 +457,7 @@ public class RadioService extends Service implements Player.EventListener, Audio
 
         m1 = p1.matcher(metaString);
         if (m1.find()) {
-            secondString = m1.group(2).trim();
+            secondString = Objects.requireNonNull(m1.group(2)).trim();
             if (secondString.endsWith(",")) {
                 secondString = secondString.substring(0, secondString.length() - 1);
             }

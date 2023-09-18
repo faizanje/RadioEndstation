@@ -1,6 +1,8 @@
 package com.lokke.radio.endstation.data.network.responses;
 
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -110,6 +112,7 @@ public class Radio implements Serializable {
     }
 
 
+    @NonNull
     @Override
     public String toString() {
         return "Radio{" +
