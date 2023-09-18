@@ -1,28 +1,36 @@
 package com.lokke.radio.endstation.util;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import androidx.annotation.NonNull;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.lokke.radio.endstation.BuildConfig;
 import com.lokke.radio.endstation.R;
 
 
-public class AdsUtil {
+public class AdsHelper {
+
 
     //This holds
 
     public static int ADS_LOAD_COUNT = 0;
+    InterstitialAd mInterstitialAd;
     public static int SHOW_ADS_WHEN_TAB_COUNT = 1; //change this to the desired number you want.
 
-    public static void loadBannerAd(Context context, final LinearLayout layoutAdContainer) {
+    public void loadBannerAd(Context context, final LinearLayout layoutAdContainer) {
 
         try {
             layoutAdContainer.setVisibility(View.GONE);
@@ -31,8 +39,7 @@ public class AdsUtil {
 
             if (BuildConfig.DEBUG)
                 adView.setAdUnitId(context.getResources().getString(R.string.test_banner_ad_id));
-            else
-                adView.setAdUnitId(context.getResources().getString(R.string.live_banner_ad_id));
+            else adView.setAdUnitId(context.getResources().getString(R.string.live_banner_ad_id));
 
             adView.setAdSize(AdSize.BANNER);
             adView.setAdListener(new AdListener() {
@@ -67,53 +74,42 @@ public class AdsUtil {
         }
     }
 
-    public static void loadInterstitialAd(Context context, InterstitialAd mInterstitialAd) {
-
+    public void loadInterstitialAd(Context context) {
+        String interstitialAdsId;
         if (BuildConfig.DEBUG)
-            mInterstitialAd.setAdUnitId(context.getResources().getString(R.string.interestial_test_ad_id));
-        else
-            mInterstitialAd.setAdUnitId(context.getResources().getString(R.string.interestial_live_ad_id));
+            interstitialAdsId = context.getResources().getString(R.string.interestial_test_ad_id);
+        else interstitialAdsId = context.getResources().getString(R.string.interestial_live_ad_id);
+
 
         AdRequest adRequest;
         adRequest = new AdRequest.Builder().build();
 
-        mInterstitialAd.loadAd(adRequest);
-        mInterstitialAd.setAdListener(new AdListener() {
+        InterstitialAd.load(context, interstitialAdsId, adRequest, new InterstitialAdLoadCallback() {
             @Override
-            public void onAdClosed() {
-                super.onAdClosed();
+            public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                // The mInterstitialAd reference will be null until
+                // an ad is loaded.
+                mInterstitialAd = interstitialAd;
                 ADS_LOAD_COUNT = 0;
-                mInterstitialAd.loadAd(adRequest);
+                Log.d(Constants.TAG, "onAdLoaded: ");
             }
 
             @Override
-            public void onAdFailedToLoad(LoadAdError errorCode) {
-                super.onAdFailedToLoad(errorCode);
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                // Handle the error
+                Log.d(Constants.TAG, "onAdFailedToLoad: ");
                 ADS_LOAD_COUNT = 0;
-                mInterstitialAd.loadAd(adRequest);
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-                super.onAdLeftApplication();
-            }
-
-            @Override
-            public void onAdOpened() {
-                super.onAdOpened();
-            }
-
-            @Override
-            public void onAdLoaded() {
-                super.onAdLoaded();
+                mInterstitialAd = null;
             }
         });
 
     }
 
-    public static void showInterstitialAd(InterstitialAd mInterstitialAd) {
-        if (mInterstitialAd.isLoaded()) {
-            mInterstitialAd.show();
+    public void showInterstitialAd(Activity activity) {
+        if (mInterstitialAd != null) {
+            mInterstitialAd.show(activity);
+        } else {
+            Log.d(Constants.TAG, "The interstitial ad wasn't ready yet.");
         }
     }
 }

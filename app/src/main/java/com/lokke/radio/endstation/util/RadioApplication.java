@@ -1,11 +1,19 @@
 package com.lokke.radio.endstation.util;
+
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.onesignal.OneSignal;
 import com.onesignal.debug.LogLevel;
+
 import android.app.Application;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 
 public class RadioApplication extends Application {
-//    private static final String ONESIGNAL_APP_ID = "d4f84244-5eca-45e4-92fb-e52e40b41c55";
+    //    private static final String ONESIGNAL_APP_ID = "d4f84244-5eca-45e4-92fb-e52e40b41c55";
     private static final String ONESIGNAL_APP_ID = "fde169c5-4bcf-497b-ae92-d7fc412568f0";
 //    @Override
 //    public void onCreate() {
@@ -31,6 +39,12 @@ public class RadioApplication extends Application {
         // OneSignal Initialization
         OneSignal.initWithContext(this, ONESIGNAL_APP_ID);
 
+        MobileAds.initialize(this.getApplicationContext(), new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(@NonNull InitializationStatus initializationStatus) {
+                Log.d(Constants.TAG, "onInitializationComplete: " + initializationStatus);
+            }
+        });
 
 
         // requestPermission will show the native Android notification permission prompt.

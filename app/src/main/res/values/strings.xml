@@ -9,8 +9,8 @@
     <string name="live_banner_ad_id" translatable="false"></string>
     <string name="interestial_live_ad_id" translatable="false"></string>
     <!--Admob test banner and interestial ads ID-->
-    <string name="test_banner_ad_id" translatable="false"></string>
-    <string name="interestial_test_ad_id" translatable="false"></string>
+    <string name="test_banner_ad_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="interestial_test_ad_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
 
 
     <string name="navigation_drawer_open">Open navigation drawer</string>

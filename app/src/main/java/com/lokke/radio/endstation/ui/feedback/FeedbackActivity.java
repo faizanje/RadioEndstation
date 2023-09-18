@@ -6,19 +6,18 @@ import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.InterstitialAd;
 import com.lokke.radio.endstation.R;
 import com.lokke.radio.endstation.data.repositories.MainActivityRepository;
 import com.lokke.radio.endstation.databinding.ActivityFeedbackBinding;
-import com.lokke.radio.endstation.util.AdsUtil;
+import com.lokke.radio.endstation.util.AdsHelper;
 import com.lokke.radio.endstation.util.AppUtil;
 
 public class FeedbackActivity extends AppCompatActivity {
 
     private ActivityFeedbackBinding mBinding;
     private FeedbackViewModel mViewModel;
-    private InterstitialAd mInterstitialAd;
 
+    AdsHelper adsHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +27,9 @@ public class FeedbackActivity extends AppCompatActivity {
 
         setUpToolbar();
 
-        mInterstitialAd = new InterstitialAd(this);
-        AdsUtil.loadInterstitialAd(this,mInterstitialAd);
+        adsHelper = new AdsHelper();
+
+        adsHelper.loadInterstitialAd(this);
 
 
         MainActivityRepository repository = new MainActivityRepository(getApplication());
@@ -69,8 +69,8 @@ public class FeedbackActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        AdsUtil.showInterstitialAd(mInterstitialAd);
         super.onBackPressed();
+        adsHelper.showInterstitialAd(this);
     }
 
     @Override

@@ -26,16 +26,14 @@ import com.lokke.radio.endstation.data.preferences.PrefManager;
 import com.lokke.radio.endstation.data.repositories.MainActivityRepository;
 import com.lokke.radio.endstation.ui.about.AboutActivity;
 import com.lokke.radio.endstation.ui.songrequest.SongRequestActivity;
-import com.lokke.radio.endstation.util.AdsUtil;
+import com.lokke.radio.endstation.util.AdsHelper;
 import com.lokke.radio.endstation.util.AppUtil;
 import com.lokke.radio.endstation.ui.radio.MetadataListener;
-import com.lokke.radio.endstation.util.RadioApplication;
 import com.lokke.radio.endstation.util.Constants;
 import com.onesignal.OneSignal;
 import com.lokke.radio.endstation.R;
 import com.lokke.radio.endstation.databinding.ActivityMainBinding;
 import com.lokke.radio.endstation.databinding.NavHeaderMainBinding;
-import com.lokke.radio.endstation.ui.feedback.FeedbackActivity;
 import com.lokke.radio.endstation.ui.radio.PlaybackStatus;
 
 import org.greenrobot.eventbus.EventBus;
@@ -51,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public String SWITCH_KEY = "SWITCH_KEY";
     private String privacyPolicyUrl;
     String oldTitle = "oldTitle";
-
+    AdsHelper adsHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,10 +61,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         model = new ViewModelProvider(MainActivity.this, factory).get(MainActivityViewModel.class);
         binding.setViewmodel(model);
 
-        MobileAds.initialize(this, initializationStatus -> {
-        });
+        adsHelper = new AdsHelper();
 
-        AdsUtil.loadBannerAd(this, binding.appBarMainLayout.adLayout);
+        adsHelper.loadInterstitialAd(this);
+        adsHelper.loadBannerAd(this,binding.appBarMainLayout.adLayout);
 
         //setSupportActionBar(binding.appBarMainLayout.toolbar);
         //getSupportActionBar().setTitle("");
