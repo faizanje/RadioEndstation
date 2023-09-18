@@ -25,6 +25,9 @@ public class AboutActivity extends AppCompatActivity {
         adsHelper = new AdsHelper();
         adsHelper.loadInterstitialAd(this);
 
+        adsHelper.loadBannerAd(this,binding.adsLayout);
+
+
         setSupportActionBar(binding.toolbarAbout);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

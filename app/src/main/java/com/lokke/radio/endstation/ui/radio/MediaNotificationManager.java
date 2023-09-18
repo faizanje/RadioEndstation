@@ -60,7 +60,7 @@ public class MediaNotificationManager {
             Glide.with(service.getApplicationContext())
                     .asBitmap()
 //                    .load(service.getRadio().getImage())
-                    .load(albumUri)
+                    .load(albumUri != null ? albumUri : service.getRadio().getImage())
                     .into(new CustomTarget<Bitmap>(100,100) {
                         @Override
                         public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {

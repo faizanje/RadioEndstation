@@ -1,5 +1,6 @@
 package com.lokke.radio.endstation.ui.radio;
 
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -169,7 +170,22 @@ public class RadioService extends Service implements Player.EventListener, Audio
         wifiLock = ((WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE))
                 .createWifiLock(WifiManager.WIFI_MODE_FULL, "mcScPAmpLock");
 
-        mediaSession = new MediaSessionCompat(this, getClass().getSimpleName());
+        Intent mediaButtonIntent = new Intent(Intent.ACTION_MEDIA_BUTTON);
+        PendingIntent pendingIntent;
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+            pendingIntent = PendingIntent.getBroadcast
+                    (this, 0, mediaButtonIntent, PendingIntent.FLAG_MUTABLE);
+        }
+        else
+        {
+            pendingIntent = PendingIntent.getBroadcast
+                    (this, 0, mediaButtonIntent, PendingIntent.FLAG_ONE_SHOT);
+        }
+
+
+
+        mediaSession = new MediaSessionCompat(this, getClass().getSimpleName(),null,pendingIntent);
         transportControls = mediaSession.getController().getTransportControls();
         mediaSession.setActive(true);
         mediaSession.setFlags(MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS | MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS);
@@ -410,7 +426,7 @@ public class RadioService extends Service implements Player.EventListener, Audio
 
     @Override
     public void onMetadata(Metadata metadata) {
-        Log.e("Metadata is --->>>", metadata.toString());
+        Log.e(Constants.TAG, "Metadata is --->>>" + metadata.toString());
         for (int i = 0; i < metadata.length(); i++) {
             Metadata.Entry entry = metadata.get(i);
             // Log.e("onMetadata: IcyInfo", entry.toString());
