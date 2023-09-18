@@ -34,7 +34,7 @@ public class FeedbackActivity extends AppCompatActivity {
 //        mInterstitialAd = new InterstitialAd(this);
         AdRequest adRequest = new AdRequest.Builder().build();
         AdsUtil adsUtil = new AdsUtil();
-        adsUtil.loadInstertitialAd(this,adRequest);
+        adsUtil.loadInterstitialAd(this,adRequest);
 
 
         MainActivityRepository repository = new MainActivityRepository(getApplication());

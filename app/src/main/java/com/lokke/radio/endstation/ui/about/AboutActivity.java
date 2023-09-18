@@ -41,8 +41,7 @@ public class AboutActivity extends AppCompatActivity {
 ////        adView.setAdSize(AdSize.BANNER);
 //        adView.loadAd(adRequest);
         AdsUtil.showBannerAd(adView,adRequest);
-        AdsUtil adsUtil = new AdsUtil();
-        adsUtil.loadInstertitialAd(this,adRequest);
+        AdsUtil.loadInterstitialAd(this,adRequest);
 
 //        adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
 
