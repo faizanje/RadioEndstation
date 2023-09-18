@@ -103,11 +103,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             if (isChecked) {
                 new PrefManager<Boolean>(this).set(SWITCH_KEY, true);
-                OneSignal.getUser().getPushSubscription().optOut();
+//                OneSignal.getUser().getPushSubscription().optOut();
 //                OneSignal.setSubscription(true);
             } else {
                 new PrefManager<Boolean>(this).set(SWITCH_KEY, false);
-                OneSignal.getUser().getPushSubscription().optIn();
+//                OneSignal.getUser().getPushSubscription().optIn();
 //                OneSignal.setSubscription(false);
             }
 
