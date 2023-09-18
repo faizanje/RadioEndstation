@@ -9,8 +9,8 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.lokke.radio.endstation.BuildConfig;
 import com.lokke.radio.endstation.R;
 
@@ -47,11 +47,6 @@ public class AdsUtil {
                 }
 
                 @Override
-                public void onAdLeftApplication() {
-                    super.onAdLeftApplication();
-                }
-
-                @Override
                 public void onAdOpened() {
                     super.onAdOpened();
                 }
@@ -72,7 +67,7 @@ public class AdsUtil {
         }
     }
 
-    public static void loadInterstitialAd(Context context,InterstitialAd mInterstitialAd) {
+    public static void loadInterstitialAd(Context context, InterstitialAd mInterstitialAd) {
 
         if (BuildConfig.DEBUG)
             mInterstitialAd.setAdUnitId(context.getResources().getString(R.string.interestial_test_ad_id));

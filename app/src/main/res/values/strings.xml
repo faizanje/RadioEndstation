@@ -4,6 +4,7 @@
     <string name="discord_base_url" translatable="false">"https://discord.com/api/webhooks/"</string>
     <!--App_ID generated from Admob-->
     <string name="adMob_app_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
+<!--    <string name="adMob_app_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>-->
     <!--interestial ads ID created from Admob-->
     <string name="live_banner_ad_id" translatable="false"></string>
     <string name="interestial_live_ad_id" translatable="false"></string>
