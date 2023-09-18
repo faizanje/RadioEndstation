@@ -59,9 +59,11 @@ public class AboutActivity extends AppCompatActivity {
         }
     }
 
+
+
     @Override
     public void onBackPressed() {
-        adsHelper.showInterstitialAd(this);
         super.onBackPressed();
+        adsHelper.showInterstitialAd(this);
     }
 }

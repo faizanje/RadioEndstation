@@ -81,26 +81,26 @@ public class MediaNotificationManager {
         int icon = R.drawable.exo_icon_pause;
         Intent playbackAction = new Intent(service, RadioService.class);
         playbackAction.setAction(RadioService.ACTION_PAUSE);
-        PendingIntent action = PendingIntent.getService(service, 1, playbackAction, 0);
+        PendingIntent action = PendingIntent.getService(service, 1, playbackAction, getFlags());
 
         if (playbackStatus.equals(PlaybackStatus.PAUSED)) {
 
             icon = R.drawable.exo_icon_play;
             playbackAction.setAction(RadioService.ACTION_PLAY);
-            action = PendingIntent.getService(service, 2, playbackAction, 0);
+            action = PendingIntent.getService(service, 2, playbackAction, getFlags());
 
         }
 
         Intent stopIntent = new Intent(service, RadioService.class);
         stopIntent.setAction(RadioService.ACTION_STOP);
-        PendingIntent stopAction = PendingIntent.getService(service, 3, stopIntent, 0);
+        PendingIntent stopAction = PendingIntent.getService(service, 3, stopIntent, getFlags());
 
 
         Intent intent = new Intent(service, MainActivity.class);
 
         intent.setAction(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_LAUNCHER);
-        PendingIntent pendingIntent = PendingIntent.getActivity(service, 0, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(service, 0, intent, getFlags());
 
         notificationManager.cancel(NOTIFICATION_ID);
 
@@ -133,8 +133,15 @@ public class MediaNotificationManager {
         service.startForeground(NOTIFICATION_ID, builder.build());
     }
 
+    private int getFlags() {
+        return isAndroidSOrGreater() ? PendingIntent.FLAG_IMMUTABLE : PendingIntent.FLAG_UPDATE_CURRENT;
+    }
+
     public void cancelNotify() {
         service.stopForeground(true);
     }
 
+    public boolean isAndroidSOrGreater(){
+        return android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S;
+    }
 }
