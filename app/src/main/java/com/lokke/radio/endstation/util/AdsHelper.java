@@ -22,10 +22,7 @@ import com.lokke.radio.endstation.R;
 
 
 public class AdsHelper {
-
-
     //This holds
-
     public static int ADS_LOAD_COUNT = 0;
     InterstitialAd mInterstitialAd;
     public static int SHOW_ADS_WHEN_TAB_COUNT = 1; //change this to the desired number you want.

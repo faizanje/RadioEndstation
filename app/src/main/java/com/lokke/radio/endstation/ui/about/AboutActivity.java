@@ -7,6 +7,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.lokke.radio.endstation.R;
@@ -25,10 +26,17 @@ public class AboutActivity extends AppCompatActivity {
         adsHelper = new AdsHelper();
         adsHelper.loadInterstitialAd(this);
 
-        setSupportActionBar(binding.toolbarAbout);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("");
+//        setSupportActionBar(binding.toolbarAbout);
+//        getSupportActionBar().setHomeButtonEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setTitle("");
+        binding.btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                adsHelper.showInterstitialAd(AboutActivity.this);
+                onBackPressed();
+            }
+        });
 
 
         try {
