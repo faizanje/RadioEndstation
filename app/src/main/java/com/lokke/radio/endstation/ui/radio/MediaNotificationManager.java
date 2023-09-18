@@ -27,8 +27,10 @@ import com.lokke.radio.endstation.ui.main.MainActivity;
 
 public class MediaNotificationManager {
     public static final int NOTIFICATION_ID = 555;
+    private final String PRIMARY_CHANNEL = "PRIMARY_CHANNEL_ID";
+    private final String PRIMARY_CHANNEL_NAME = "PRIMARY";
 
-    private final RadioService service;
+    private RadioService service;
 
 
     String mRadioName;
@@ -102,10 +104,8 @@ public class MediaNotificationManager {
 
         notificationManager.cancel(NOTIFICATION_ID);
 
-        String PRIMARY_CHANNEL = "PRIMARY_CHANNEL_ID";
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationManager manager = (NotificationManager) service.getSystemService(Context.NOTIFICATION_SERVICE);
-            String PRIMARY_CHANNEL_NAME = "PRIMARY";
             NotificationChannel channel = new NotificationChannel(PRIMARY_CHANNEL, PRIMARY_CHANNEL_NAME, NotificationManager.IMPORTANCE_LOW);
             channel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
             manager.createNotificationChannel(channel);

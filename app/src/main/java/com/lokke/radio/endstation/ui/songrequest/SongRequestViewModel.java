@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.lokke.radio.endstation.data.network.responses.Response;
 import com.lokke.radio.endstation.data.repositories.MainActivityRepository;
+import com.lokke.radio.endstation.ui.feedback.Feedback;
 
 public class SongRequestViewModel extends ViewModel {
 

@@ -74,7 +74,7 @@ public class PrefManager<T> {
             return (T) ret;
         }
         else if (defaultValue instanceof Collection) {
-            Set<String> result = sp.getStringSet(key, new HashSet<>());
+            Set<String> result = sp.getStringSet(key, new HashSet<String>());
             return (T) result;
         }
         else if (defaultValue instanceof String) {

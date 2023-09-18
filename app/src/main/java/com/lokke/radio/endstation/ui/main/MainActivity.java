@@ -18,20 +18,19 @@ import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
+
 import com.bumptech.glide.Glide;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.navigation.NavigationView;
 import com.lokke.radio.endstation.data.preferences.PrefManager;
 import com.lokke.radio.endstation.data.repositories.MainActivityRepository;
 import com.lokke.radio.endstation.ui.about.AboutActivity;
 import com.lokke.radio.endstation.ui.songrequest.SongRequestActivity;
-
-
+import com.lokke.radio.endstation.util.AdsHelper;
 import com.lokke.radio.endstation.util.AppUtil;
 import com.lokke.radio.endstation.ui.radio.MetadataListener;
 import com.lokke.radio.endstation.util.Constants;
+import com.onesignal.OneSignal;
 import com.lokke.radio.endstation.R;
 import com.lokke.radio.endstation.databinding.ActivityMainBinding;
 import com.lokke.radio.endstation.databinding.NavHeaderMainBinding;
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public String SWITCH_KEY = "SWITCH_KEY";
     private String privacyPolicyUrl;
     String oldTitle = "oldTitle";
-
+    AdsHelper adsHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,16 +58,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         MainActivityRepository repository = new MainActivityRepository(this);
         MainFactory factory = new MainFactory(this, repository);
-        model = new ViewModelProvider(this,factory).get(MainActivityViewModel.class);
+        model = new ViewModelProvider(MainActivity.this, factory).get(MainActivityViewModel.class);
         binding.setViewmodel(model);
 
+        adsHelper = new AdsHelper();
 
-        MobileAds.initialize(this, initializationStatus -> {
-        });
-
-//        AdView adView =
-//
-//        AdsUtil.showBannerAd();
+        adsHelper.loadInterstitialAd(this);
+        adsHelper.loadBannerAd(this,binding.appBarMainLayout.adLayout);
 
         //setSupportActionBar(binding.appBarMainLayout.toolbar);
         //getSupportActionBar().setTitle("");

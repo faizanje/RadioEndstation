@@ -33,6 +33,7 @@ public class MainActivityViewModel extends ViewModel {
     private RadioManager radioManager;
     private MutableLiveData<Response> reportResponseLiveData = new MutableLiveData<>();
     public MutableLiveData<Radio> radioObjectLiveData;
+    private MainActivityRepository repository;
     private MutableLiveData<String> timerText = new MutableLiveData<>();
     public Radio radio;
     private boolean isTimerSet = false;
@@ -46,6 +47,7 @@ public class MainActivityViewModel extends ViewModel {
     public MainActivityViewModel(Context context, MainActivityRepository repository) {
         radioManager = RadioManager.with(context);
 //        radioManager = new RadioManager(context);
+        this.repository = repository;
         radioObjectLiveData = repository.getRadio();
     }
 

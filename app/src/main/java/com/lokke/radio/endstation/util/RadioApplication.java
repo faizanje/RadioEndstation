@@ -15,6 +15,20 @@ import androidx.annotation.NonNull;
 public class RadioApplication extends Application {
     //    private static final String ONESIGNAL_APP_ID = "d4f84244-5eca-45e4-92fb-e52e40b41c55";
     private static final String ONESIGNAL_APP_ID = "fde169c5-4bcf-497b-ae92-d7fc412568f0";
+//    @Override
+//    public void onCreate() {
+//        super.onCreate();
+
+    //        // Logging set to help debug issues, remove before releasing your app.
+//        if (BuildConfig.DEBUG)
+//            OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
+//
+//        // OneSignal Initialization
+//        OneSignal.startInit(this)
+//                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+//                .unsubscribeWhenNotificationsAreDisabled(true)
+//                .init();
+//    }
     @Override
     public void onCreate() {
         super.onCreate();
