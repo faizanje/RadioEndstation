@@ -18,12 +18,12 @@ import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
-
 import com.bumptech.glide.Glide;
-import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.navigation.NavigationView;
 import com.lokke.radio.endstation.data.preferences.PrefManager;
 import com.lokke.radio.endstation.data.repositories.MainActivityRepository;
+import com.lokke.radio.endstation.databinding.ActivityMainBinding;
+import com.lokke.radio.endstation.databinding.NavHeaderMainBinding;
 import com.lokke.radio.endstation.ui.about.AboutActivity;
 import com.lokke.radio.endstation.ui.songrequest.SongRequestActivity;
 import com.lokke.radio.endstation.util.AdsHelper;
@@ -32,8 +32,8 @@ import com.lokke.radio.endstation.ui.radio.MetadataListener;
 import com.lokke.radio.endstation.util.Constants;
 import com.onesignal.OneSignal;
 import com.lokke.radio.endstation.R;
-import com.lokke.radio.endstation.databinding.ActivityMainBinding;
-import com.lokke.radio.endstation.databinding.NavHeaderMainBinding;
+
+
 import com.lokke.radio.endstation.ui.radio.PlaybackStatus;
 
 import org.greenrobot.eventbus.EventBus;
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         adsHelper = new AdsHelper();
 
         adsHelper.loadInterstitialAd(this);
-        adsHelper.loadBannerAd(this,binding.appBarMainLayout.adLayout);
+        adsHelper.loadBannerAd(this,binding.appBarMainLayout.adView);
 
         //setSupportActionBar(binding.appBarMainLayout.toolbar);
         //getSupportActionBar().setTitle("");

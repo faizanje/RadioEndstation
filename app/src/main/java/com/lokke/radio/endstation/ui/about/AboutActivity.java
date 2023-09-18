@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.lokke.radio.endstation.R;
 import com.lokke.radio.endstation.databinding.ActivityAboutBinding;
@@ -24,7 +25,11 @@ public class AboutActivity extends AppCompatActivity {
         ActivityAboutBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_about);
 
         adsHelper = new AdsHelper();
+
         adsHelper.loadInterstitialAd(this);
+        AdView adView = binding.adView;
+
+        adsHelper.loadBannerAd(this,adView);
 
 //        setSupportActionBar(binding.toolbarAbout);
 //        getSupportActionBar().setHomeButtonEnabled(true);
@@ -66,6 +71,7 @@ public class AboutActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        adsHelper.loadInterstitialAd(this);
         adsHelper.showInterstitialAd(this);
         super.onBackPressed();
     }

@@ -101,8 +101,8 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:onClick="@{viewmodel::onSetTimerClicked}"
-                android:tint="#BDBDBD"
-                app:srcCompat="@drawable/ic_clock" />
+                app:srcCompat="@drawable/ic_clock"
+                app:tint="#BDBDBD" />
 
             <ImageButton
                 android:id="@+id/share_button"
@@ -112,10 +112,10 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:focusable="true"
-                android:tint="#BDBDBD"
                 android:onClick="@{(view) -> viewmodel.onShareClicked(view, radio.name)}"
                 android:paddingEnd="4dp"
-                app:srcCompat="@drawable/ic_share" />
+                app:srcCompat="@drawable/ic_share"
+                app:tint="#BDBDBD" />
 
 
             <ImageButton
@@ -125,10 +125,10 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:focusable="true"
-                android:tint="#BDBDBD"
                 android:onClick="@{viewmodel::onReportStreamClicked}"
                 android:paddingStart="2dp"
-                app:srcCompat="@drawable/ic_baseline_favorite_border_24" />
+                app:srcCompat="@drawable/ic_baseline_favorite_border_24"
+                app:tint="#BDBDBD" />
         </LinearLayout>
 
         <TextView
@@ -217,6 +217,24 @@
                 tools:text="England" />
 
         </LinearLayout>
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+            android:layout_centerHorizontal="true"
+            app:adSize="BANNER"
+            app:adUnitId="ca-app-pub-3940256099942544/6300978111"
+
+
+            app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        </com.google.android.gms.ads.AdView>
 
 
         <androidx.appcompat.widget.Toolbar
